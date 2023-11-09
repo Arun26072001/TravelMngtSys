@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block title %}
+Enquiry Form
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <div class="container d-flex justify-content-end" style="margin-top: 15px;">
+      <a href="{% url 'logout' %}" class="btn btn-primary mr-2">
+        🚪 Log out
+      </a>
+  </div>
+    <div class="row justify-content-center">  <!-- Added justify-content-center to the row class -->
+      <div class="col-sm-12 col-md-8 col-lg-6"> <!-- Adjusted column width classes -->
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h3 class="card-title text-center mb-5 fw-light fs-5"><b>Enquiry Form</b></h3>
+            {% if messages %}
+              {% for msg in messages %}
+                {% if msg.tags == 'error' %}
+                  <div class="alert alert-danger">{{ msg }}</div>
+                {% else %}
+                  <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            <form method="POST">
+              <div class="form-floating mb-5">
+                {% csrf_token %}
+                {{ form.as_p }}
+              </div>
+
+              <div class="d-grid">
+                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Submit</button>
+              </div>
+              <hr class="my-4" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,237 @@
+{% extends "index.html" %}
+
+{% block head %}
+<style>
+    .custom {
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
+        padding: 0.75rem 1rem;
+    }
+</style>
+{% endblock head %}
+
+{% block content %}
+<div class="container d-flex justify-content-end" style="margin-top: 15px;">
+    <a href="{% url 'logout' %}" class="btn btn-primary mr-2">
+        🚪 Log out
+    </a>
+</div>
+<div class="container">
+    
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+                <div class="card-body p-4 p-sm-5">
+
+                    <h3 style="text-align:center;">Your Accesses</h3>
+                    {% if messages %}
+                    {% for msg in messages %}
+                    {% if msg.tags == 'error' %}
+                    <div class="alert alert-danger">
+                        {{ msg }}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-{{msg.tags}}">
+                        {{ msg }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if  'driver' in accesses %}
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('driver')">driver</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-driver">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-driver" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'driver' 'VALUE' %}"
+                                    id="access-driver" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+                    {% elif 'alart' in accesses  %}
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('alart')">alart</button><br>
+                        </div>
+                        <div class="input-group alart d-none" id="name-alart">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-alart" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'alart' 'VALUE' %}"
+                                    id="access-alart" class="text-decoration-none text-white">search</a></button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('driver')">driver</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-driver">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-driver" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'driver' 'VALUE' %}"
+                                    id="access-driver" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+
+                    {% elif 'enquiry' in accesses %}
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('enquiry')">enquiry</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-enquiry">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-enquiry" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'enquiry' 'VALUE' %}"
+                                    id="access-enquiry" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('datatable')">Data Table</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-datatable">
+                            <input type="text" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-datatable" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'datatable' 'VALUE' %}"
+                                    id="access-datatable" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+
+
+                    {% elif 'owner' in accesses %}
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('alart')">alart</button><br>
+                        </div>
+                        <div class="input-group alart d-none" id="name-alart">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-alart" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'alart' 'VALUE' %}"
+                                    id="access-alart" class="text-decoration-none text-white">search</a></button>
+                        </div>
+                    </div>
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('driver')">driver</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-driver">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-driver" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'driver' 'VALUE' %}"
+                                    id="access-driver" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('enquiry')">enquiry</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-enquiry">
+                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-enquiry" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'enquiry' 'VALUE' %}"
+                                    id="access-enquiry" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 text-center" style="margin-top: 50px">
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold"
+                                onclick="showPrompt('datatable')">Data Table</button><br>
+                        </div>
+                        <div class="input-group d-none" id="name-datatable">
+                            <input type="text" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                aria-describedby="search-addon" id="cusmob-datatable" />
+                            <button type="button" class="btn btn-primary"><a href="{% url 'datatable' 'VALUE' %}"
+                                    id="access-datatable" class="text-decoration-none text-white">search</a></button>
+                        </div>
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="alert alert-danger">
+                        You are in wrong path please Go Back!
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    function showPrompt(access) {
+        if (access === 'datatable') {
+            var userInput = prompt("Enter which date you want to search: pls Give Like this(yyyy-mm-dd): ")
+            var isDate = !isNaN(Date.parse(userInput));
+        } else {
+            var userInput = prompt("Please Enter Customer Contact No for " + access + ":");
+        }
+
+        while (!userInput || userInput.trim() === "" || userInput.length < 5 || userInput.length > 10) {
+            userInput = prompt("Please Enter a valid Customer Contact No (between 5 and 12 characters) for " + access + ":",);
+
+        }
+        document.getElementById('cusmob-' + access).value = userInput;
+        console.log(userInput)
+
+        if (userInput || isDate) {
+            val = document.getElementById('name-' + access)
+            val.classList.remove('d-none')
+            if (isDate) {
+                console.log(isDate)
+                var url = document.getElementById('access-' + access).getAttribute('href');
+                url = url.replace('VALUE', userInput);
+            }
+            else {
+                var url = document.getElementById('access-' + access).getAttribute('href');
+                url = url.replace('VALUE', '+91' + userInput);
+                console.log(url)
+            }
+        }
+
+
+
+        document.getElementById('access-' + access).setAttribute('href', url);
+    }
+</script>
+{% endblock content %}
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").hide();
+        }, 10000);
+    });
+
+</script>

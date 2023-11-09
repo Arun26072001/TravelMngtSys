@@ -1,0 +1,90 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    Date of Bookings
+{% endblock %}
+<style>
+  .red-background {
+    background-color: red;
+}
+</style>
+
+{% block content %}
+<div class="container d-flex justify-content-end" style="margin-top: 15px;">
+  <a href="{% url 'logout' %}" class="btn btn-primary mr-2">
+    🚪 Log out
+  </a>
+</div>
+    <h2 style="text-align:center;">Data table</h2>
+    {% if data %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Customer Contact</th>
+                        <th>Pickup Date</th>
+                        <th>Drop Date</th>
+                        <th>Pickup Location</th>
+                        <th>Drop Location</th>
+                        <th>Visit Places</th>
+                        <th>Vehicle Type</th>
+                        <th>Total Amount Included</th>
+                        <th>Advance Amount</th>
+                        <th>Driver Name</th>
+                        <th>Driver Contact</th>
+                        <th>Vehicle Number</th>
+                    </tr>
+                </thead>
+                {% for date in data %}
+                        {% if date.driver_contact %}
+                          <tbody>
+                                  <tr class="table-success">
+                                      <td>{{ date.customer_name }}</td>
+                                      <td>{{ date.customer_contact }}</td>
+                                      <td>{{ date.pickup_date }}</td>
+                                      <td>{{ date.drop_date }}</td>
+                                      <td>{{ date.pickup_location }}</td>
+                                      <td>{{ date.drop_location }}</td>
+                                      <td>{{ date.visit_places }}</td>
+                                      {% if date.vehicle_type == 'Tempo' %}
+                                          <td class="text-danger">{{ date.vehicle_type }}</td>
+                                      {% else %}
+                                          <td>{{ date.vehicle_type }}</td>
+                                      {% endif %}
+                                      <td>{{ date.total_amount_included }}</td>
+                                      <td>{{ date.advance_amount }}</td>
+                                      <td>{{ date.driver_name }}</td>
+                                      <td>{{ date.driver_contact }}</td>
+                                      <td>{{ date.vehicle_number }}</td>
+                                  </tr>
+                                  {% else %}
+                                  <tr class="table-danger">
+                                    <td>{{ date.customer_name }}</td>
+                                    <td>{{ date.customer_contact }}</td>
+                                    <td>{{ date.pickup_date }}</td>
+                                    <td>{{ date.drop_date }}</td>
+                                    <td>{{ date.pickup_location }}</td>
+                                    <td>{{ date.drop_location }}</td>
+                                    <td>{{ date.visit_places }}</td>
+                                    {% if date.vehicle_type == 'Tempo' %}
+                                        <td class="text-danger">{{ date.vehicle_type }}</td>
+                                    {% else %}
+                                        <td>{{ date.vehicle_type }}</td>
+                                    {% endif %}
+                                    <td>{{ date.total_amount_included }}</td>
+                                    <td>{{ date.advance_amount }}</td>
+                                    <td>{{ date.driver_name }}</td>
+                                    <td>{{ date.driver_contact }}</td>
+                                    <td>{{ date.vehicle_number }}</td>
+                                </tr>
+                                  {% endif %}
+                              {% endfor %}
+                          </tbody>
+                          
+            </table>
+        </div>
+    {% else %}
+        <p>No data available.</p>
+    {% endif %}
+{% endblock %}
